@@ -64,6 +64,13 @@ for card in reversed(deck):
 
 print(deck._cards)
 
+def spades_high(card):
+    rank_value = FrenchDeck.ranks.index(card.rank)
+    return rank_value * len(FrenchDeck.suit_values) + FrenchDeck.suit_values[card.suit]
+
+for card in sorted(deck, key=spades_high):
+    print(card)
+
 if __name__ == "__main__":
     # python file.py -v
     import doctest
