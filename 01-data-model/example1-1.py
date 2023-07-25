@@ -8,6 +8,7 @@ This is an example of doctest
 import collections
 from random import choice
 
+# To create a new class withou custom methods
 Card = collections.namedtuple('Card', ["rank", "suit"])
 
 class FrenchDeck:
