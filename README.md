@@ -207,3 +207,40 @@ A repository based on fluent python book
 * \_\_ixor\_\_
 * \_\_ilshift\_\_
 * \_\_irshift\_\_
+
+# Inherit of Sequences and Mutable Sequences
+
+## Collections 
+
+* \_\_contains\_\_
+* \_\_len\_\_
+* \_\_iter\_\_
+
+## Reversible
+
+* \_\_reversed\_\_
+
+The class below inherit from classes above
+
+## Sequence
+
+* \_\_getitem\_\_
+* \_\_contains\_\_
+* \_\_iter\_\_
+* \_\_reversed\_\_
+* index
+* count
+
+The class below inherit from classes above
+
+## MutableSequence
+
+* \_\_setitem\_\_
+* \_\_delitem\_\_
+* insert
+* append
+* reverse
+* extend
+* pop
+* remove
+* \_\_iadd\_\_
