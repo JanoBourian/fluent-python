@@ -1,80 +1,60 @@
-"""
-This is an example of doctest
->>> deck = FrenchDeck()
->>> len(deck)
-52
-"""
-
 import collections
 from random import choice
+from datetime import datetime
 
-# To create a new class withou custom methods
-Card = collections.namedtuple('Card', ["rank", "suit"])
+Card = collections.namedtuple('Card', ['rank', 'suit'])
 
 class FrenchDeck:
-    """ Return a French deck 
-    
-    >>> deck = FrenchDeck()
-    >>> deck.__len__()
-    52
-
-    Returns:
-        FrenchDeck: A French deck
-    """
-    ranks = [str(n) for n in range(2,11)] + list("JQKA")
-    suites = "spades diamonds clubs hearts".split()
-    suit_values = dict(spades=3, hearts=2, diamonds=1, clubs=0)
+    ranks = [str(n) for n in range(2,11)] + list('JQKA')
+    suits = "spades diamonds clubs heart".split()
     
     def __init__(self):
-        """
-        >>> deck = FrenchDeck()
-        """
-        self._cards = [Card(rank, suit) for suit in self.suites for rank in self.ranks]
-        
-    def __len__(self):
-        """
-        >>> deck = FrenchDeck()
-        >>> deck.__len__()
-        52
-        """
-        return len(self._cards)
+        self._cards = [Card(rank, suit) for suit in self.suits 
+                                        for rank in self.ranks]
     
     def __getitem__(self, position):
-        """
-        >>> deck = FrenchDeck()
-        >>> deck.__getitem__(0)
-        Card(rank='2', suit='spades')
-        """
         return self._cards[position]
     
-    def get_random_card(self):
-        return choice(self._cards)
+    def __len__(self):
+        return len(self._cards)
 
 deck = FrenchDeck()
 print(len(deck))
+print(deck[0])
 print(choice(deck))
-print(deck.get_random_card())
-print(deck[:3])
-print(deck[12::13])
 
-for card in deck:
-    print(card.rank, card.suit, card)
-
-for card in reversed(deck):
+for card in deck: # doctest: +ELLIPSIS
     print(card)
-
-print(deck._cards)
+    
+suit_values = dict(spades=3, heart=2, diamonds=1, clubs=0)
+print(suit_values)
 
 def spades_high(card):
     rank_value = FrenchDeck.ranks.index(card.rank)
-    return rank_value * len(FrenchDeck.suit_values) + FrenchDeck.suit_values[card.suit]
+    print(card.rank)
+    return rank_value*len(suit_values) + suit_values[card.suit]
 
 for card in sorted(deck, key=spades_high):
     print(card)
+    
+### Working with sorted method
+items = [3, 5, 7, 8, 4, 2]
+values_level = dict(even=1, odd=0)
 
-if __name__ == "__main__":
-    # python file.py -v
-    import doctest
-    doctest.testmod()
+def odd_first(value):
+    tag = "odd" if value%2!=0 else "even"
+    return value*values_level[tag]
 
-# python -m doctest -v file.py
+for item in sorted(items, key=odd_first):
+    print(item)
+
+### Another example
+# (id, name, datetime)
+db_records = [
+    (1,"john", datetime(2024, 1, 15)),
+    (2,"pink", datetime(2024, 2, 14)),
+    (3,"mark", datetime(2023, 9, 19))
+    ]
+
+for record in sorted(db_records, key= lambda item: item[2]):
+    print(record)
