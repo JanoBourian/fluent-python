@@ -1,6 +1,12 @@
 # fluent-python
 A repository based on fluent python book
 
+# Topics
+* [] collections
+* [] random
+* [] doctest
+* [] HOW TO sorting 
+
 # Collections
 
 ## Set
