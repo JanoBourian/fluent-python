@@ -1,3 +1,10 @@
+"""
+Doctest can be put in the top of the script
+>>> deck = FrenchDeck()
+>>> len(deck)
+52
+"""
+
 import collections
 from random import choice
 from datetime import datetime
@@ -5,17 +12,39 @@ from datetime import datetime
 Card = collections.namedtuple('Card', ['rank', 'suit'])
 
 class FrenchDeck:
+    """Return a FrenchDeck
+    
+    >>> deck = FrenchDeck()
+    >>> deck.__len__()
+    52
+
+    Returns:
+        FrenchDeck: A FrenchDeck representation
+    """
     ranks = [str(n) for n in range(2,11)] + list('JQKA')
     suits = "spades diamonds clubs heart".split()
     
     def __init__(self):
+        """
+        >>> deck = FrenchDeck()
+        """
         self._cards = [Card(rank, suit) for suit in self.suits 
                                         for rank in self.ranks]
     
     def __getitem__(self, position):
+        """
+        >>> deck = FrenchDeck()
+        >>> deck.__getitem__(0)
+        Card(rank='2', suit='spades')
+        """
         return self._cards[position]
     
     def __len__(self):
+        """
+        >>> deck = FrenchDeck()
+        >>> deck.__len__()
+        52
+        """
         return len(self._cards)
 
 deck = FrenchDeck()
@@ -38,10 +67,14 @@ for card in sorted(deck, key=spades_high):
     print(card)
     
 ### Working with sorted method
-items = [3, 5, 7, 8, 4, 2]
+items = [2, 4, 8, 3, 5, 7]
 values_level = dict(even=1, odd=0)
 
 def odd_first(value):
+    """
+    >>> odd_first(5)
+    0
+    """
     tag = "odd" if value%2!=0 else "even"
     return value*values_level[tag]
 
@@ -58,3 +91,10 @@ db_records = [
 
 for record in sorted(db_records, key= lambda item: item[2]):
     print(record)
+    
+if __name__ == "__main__":
+    # python file.py -v
+    import doctest
+    doctest.testmod()
+
+# python -m doctest -v file.py
