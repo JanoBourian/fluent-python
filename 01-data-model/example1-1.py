@@ -1,6 +1,7 @@
 """
 Doctest can be put in the top of the script
 >>> deck = FrenchDeck()
+Class was created!
 >>> len(deck)
 52
 """
@@ -10,11 +11,19 @@ from random import choice
 from datetime import datetime
 
 Card = collections.namedtuple('Card', ['rank', 'suit'])
+Card.__doc__ = """
+>>> card = Card('A', 'spades')
+>>> card.rank
+'A'
+>>> card.suit
+'spades'
+"""
 
 class FrenchDeck:
     """Return a FrenchDeck
     
     >>> deck = FrenchDeck()
+    Class was created!
     >>> deck.__len__()
     52
 
@@ -24,16 +33,35 @@ class FrenchDeck:
     ranks = [str(n) for n in range(2,11)] + list('JQKA')
     suits = "spades diamonds clubs heart".split()
     
+    def __new__(cls):
+        """
+        >>> deck = FrenchDeck().__new__
+        Class was created!
+        """
+        print("Class was created!")
+        return super().__new__(cls)
+    
     def __init__(self):
         """
         >>> deck = FrenchDeck()
+        Class was created!
         """
         self._cards = [Card(rank, suit) for suit in self.suits 
                                         for rank in self.ranks]
     
+    def __call__(self):
+        """
+        >>> deck = FrenchDeck()
+        Class was created!
+        >>> deck()
+        FenchDeck was called!
+        """
+        print("FenchDeck was called!")
+    
     def __getitem__(self, position):
         """
         >>> deck = FrenchDeck()
+        Class was created!
         >>> deck.__getitem__(0)
         Card(rank='2', suit='spades')
         """
@@ -42,10 +70,20 @@ class FrenchDeck:
     def __len__(self):
         """
         >>> deck = FrenchDeck()
+        Class was created!
         >>> deck.__len__()
         52
         """
         return len(self._cards)
+    
+    def __str__(self):
+        """
+        >>> deck = FrenchDeck()
+        Class was created!
+        >>> print(deck)
+        FrenchDeck()
+        """
+        return "FrenchDeck()"
 
 deck = FrenchDeck()
 print(len(deck))
